@@ -97,6 +97,9 @@ func mapFromRoleToData(data *schema.ResourceData, role *keycloak.Role) {
 	data.Set("name", role.Name)
 	data.Set("description", role.Description)
 	data.Set("attributes", attributes)
+	if len(role.CompositeRoles) > 0 {
+	    data.Set("composite_roles", role.CompositeRoles)
+	}
 }
 
 func resourceKeycloakRoleCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
